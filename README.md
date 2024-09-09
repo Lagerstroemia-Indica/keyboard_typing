@@ -1,5 +1,5 @@
 # KeyboardTyping Widget
-[![Pub Version](https://img.shields.io/pub/v/torchx?color=blue)](https://pub.dev/packages/keyboard_typing)
+[![Pub Version](https://img.shields.io/pub/v/keyboard_typing?color=blue)](https://pub.dev/packages/keyboard_typing)
 
 <img src="https://github.com/user-attachments/assets/687af0c6-bf6c-4b6c-a63e-330f8c4d9a70" width="320">
 

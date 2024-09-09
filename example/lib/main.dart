@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:typing/keyboard_typing.dart';
+import 'package:keyboard_typing/keyboard_typing.dart';
 import 'package:flutter_logcat/flutter_logcat.dart';
 
 void main() {

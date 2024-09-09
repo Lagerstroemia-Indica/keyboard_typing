@@ -1,6 +1,6 @@
 name: keyboard_typing
-description: "Displays Text widget as if it's being typed on a keyboard"
-version: 0.0.1
+description: "Creates an animation effect where the text appears as if it's being typed on a keyboard."
+version: 0.0.2
 repository: https://github.com/b3lon9/keyboard_typing
 
 environment:

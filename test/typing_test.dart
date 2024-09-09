@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-// import 'package:typing/typing.dart';
+// import 'package:typing/keyboard_typing.dart';
 
 void main() {
   // test('adds one to input values', () {

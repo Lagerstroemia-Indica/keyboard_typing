@@ -23,7 +23,7 @@ flutter pub add keyboard_typing
 
 #### Import
 ```dart
-import 'package:picture_button/keyboard_typing.dart';
+import 'package:keyboard_typing/keyboard_typing.dart';
 ```
 
 <br/>

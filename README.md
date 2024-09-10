@@ -71,6 +71,8 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 
 #### Repeat Typing Animation 🌀
 
+<img src="https://github.com/user-attachments/assets/9d226eb0-f850-4590-9133-f1c6b7f2722b" alt="GIF" width="320">
+
 ```dart
   KeyboardTyping(
     text: Text("Something Text"),

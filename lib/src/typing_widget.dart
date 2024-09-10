@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:keyboard_typing/src/typing_const.dart';
+import '/src/typing_mode.dart';
 import '/src/typing_control_state.dart';
 import '/src/typing_controller.dart';
 import '/src/typing_state.dart';
@@ -11,11 +13,22 @@ class KeyboardTyping extends StatefulWidget {
     super.key,
     required this.text,
     this.controller,
+    this.mode = KeyboardTypingMode.normal,
     this.duration,
   });
 
   final Text text;
   final KeyboardTypingController? controller;
+
+  /// KeyboardTypingMode default value [KeyboardTypingMode.normal]
+  ///
+  /// One shot played.
+  ///
+  /// -
+  ///
+  /// [KeyboardTypingMode.repeat] is re-write begin it.
+  ///
+  final KeyboardTypingMode mode;
   final Duration? duration;
 
   @override
@@ -101,14 +114,20 @@ class _TypingWidgetState extends State<KeyboardTyping>
       // typingEventListener(state: TypingControlState.stop);
       timer.cancel();
       messageTimer = null;
+
+      if (widget.mode == KeyboardTypingMode.repeat) {
+        typingEventListener(
+            bundle: {TypingConstant.controlState: TypingControlState.play});
+      }
     }
   }
 
   /// Receive [KeyboardTypingState] value from [TypingController]
   void typingEventListener({
-    required TypingControlState state,
+    required Map<String, dynamic> bundle,
   }) {
     // debugPrint("typingEventListener.. state:$state");
+    TypingControlState state = bundle[TypingConstant.controlState];
 
     switch (state) {
       case TypingControlState.play:
@@ -128,6 +147,11 @@ class _TypingWidgetState extends State<KeyboardTyping>
           messageTimer?.cancel();
           messageTimer = null;
 
+          bool isForceStop = bundle[TypingConstant.stopForced] ?? false;
+
+          if (isForceStop) {
+            messageQueue.clear();
+          }
           provider.state = messageQueue.isNotEmpty
               ? KeyboardTypingState.pause
               : KeyboardTypingState.stop;

@@ -2,10 +2,11 @@ import '/src/typing_control_state.dart';
 import '/src/typing_protocol.dart';
 import '/src/typing_state.dart';
 import '/src/typing_widget.dart';
+import '/src/typing_const.dart';
 
 class KeyboardTypingController extends TypingProtocol {
   TypingStateProvider? _state;
-  late final Function({required TypingControlState state})
+  late final Function({required Map<String, dynamic> bundle})
       _typingControlEventListener;
   Function(KeyboardTypingState state)? _typingStateEventListener;
 
@@ -15,13 +16,14 @@ class KeyboardTypingController extends TypingProtocol {
   ///
   /// Do not use this.
   void setTypingEventListener(TypingStateProvider state,
-      Function({required TypingControlState state}) eventFunction) {
+      Function({required Map<String, dynamic> bundle}) eventFunction) {
     _state = state..addEventListener(_typingStateEventListener);
     _typingControlEventListener = eventFunction;
   }
 
   /// Start Typing Animation. (like keyboard).
   ///
+  /// Resume is when [KeyboardTypingState.pause].
   @override
   void play() {
     assert(_state != null,
@@ -29,18 +31,30 @@ class KeyboardTypingController extends TypingProtocol {
 
     if (_state != null) {
       _typingControlEventListener(
-        state: TypingControlState.play,
+        bundle: {TypingConstant.controlState: TypingControlState.play},
       );
     }
   }
 
+  /// [stop] function can stop typing action.
+  ///
+  /// [cancel] parameter is default 'false'.
+  /// If you define 'true', It will be forced stop.
+  ///
+  /// and use [play] function clear sentence in Text Widget.
+  ///
+  /// If keyboardtyping state is [KeyboardTypingState.pause] so will can not apply forced stop.
+  ///
   @override
-  void stop() {
+  void stop({bool cancel = false}) {
     assert(_state != null,
         "Put [TypingController] into [Typing] Widget's 'controller' parameter");
 
     if (_state != null) {
-      _typingControlEventListener(state: TypingControlState.stop);
+      _typingControlEventListener(bundle: {
+        TypingConstant.controlState: TypingControlState.stop,
+        TypingConstant.stopForced: cancel
+      });
     }
   }
 

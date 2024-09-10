@@ -17,7 +17,14 @@ class KeyboardTyping extends StatefulWidget {
     this.duration,
   });
 
+  /// TextWidget.
+  ///
+  /// Define free !
   final Text text;
+
+  /// If you want to control 'play', 'stop' so use this.
+  ///
+  /// and know state addStateEventListener [KeyboardTypingState].
   final KeyboardTypingController? controller;
 
   /// KeyboardTypingMode default value [KeyboardTypingMode.normal]
@@ -29,6 +36,8 @@ class KeyboardTyping extends StatefulWidget {
   /// [KeyboardTypingMode.repeat] is re-write begin it.
   ///
   final KeyboardTypingMode mode;
+
+  /// Default duration milliseconds: 150
   final Duration? duration;
 
   @override

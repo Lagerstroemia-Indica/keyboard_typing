@@ -1,7 +1,7 @@
 # KeyboardTyping Widget
 [![Pub Version](https://img.shields.io/pub/v/keyboard_typing?color=blue)](https://pub.dev/packages/keyboard_typing)
 
-<img src="https://github.com/user-attachments/assets/687af0c6-bf6c-4b6c-a63e-330f8c4d9a70" width="320">
+<img src="https://github.com/user-attachments/assets/175be5ab-5877-4192-b5eb-ba1d91cdd56d" alt="GIF" width="320">
 
 <br/>
 <br/>
@@ -39,6 +39,7 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 |-----------------|---------------------|----------------------------|-----------------------------|
 | text            | :heavy_check_mark:  | Text                       |                             |
 | controller      | :x:                 | KeyboardTypingController?  |                             |
+| mode            | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal   |
 | duration        | :x:                 | Duration?                  | Duration(milliseconds: 150) |
 
 ```dart
@@ -64,6 +65,17 @@ import 'package:keyboard_typing/keyboard_typing.dart';
   KeyboardTypingController controller = KeyboardTypingController();
   
   controller.stop();
+```
+
+<br/>
+
+#### Repeat Typing Animation 🌀
+
+```dart
+  KeyboardTyping(
+    text: Text("Something Text"),
+    mode: KeyboardTypingMode.repeat,
+  )
 ```
 
 <br/>

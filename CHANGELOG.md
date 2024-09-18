@@ -1,5 +1,5 @@
 ## 0.0.5
-* Modify text about previewTextColor's description.
+* Modify previewTextColor's description.
 
 ## 0.0.4
 * Add previewTextColor parameter.

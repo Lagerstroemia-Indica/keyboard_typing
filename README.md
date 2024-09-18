@@ -6,15 +6,7 @@
 <br/>
 <br/>
 
-## Getting Started
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/keyboard_typing),
-a specialized package that includes platform-specific implementation code for all.
-
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🌱 Getting Started
 
 #### Add
 ```text
@@ -29,25 +21,41 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 <br/>
 <br/>
 
+## 🌤 Update
+- If you define `previewTextColor` paremeter, you can see preview TextWidget's data.
+<!--![previewTextColor](https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc)-->
+<img src="https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc" alt="GIF" width="420">
+
+```dart
+  KeyboardTyping(
+    text: Text("Something Text"),
+    previewTextColor: Colors.grey.withOpacity(0.5),
+  )
+```
+
+<br/>
+
 ## 🚀 Usage
 - If you don't define a `KeyboardTypingController`, The `KeyboardTyping` Widget plays automatically.
 
 
 #### Create KeyboardTyping Widget ⌨
 
-| parameter       | required            | type                       | default                     |
-|-----------------|---------------------|----------------------------|-----------------------------|
-| text            | :heavy_check_mark:  | Text                       |                             |
-| controller      | :x:                 | KeyboardTypingController?  |                             |
-| mode            | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal   |
-| duration        | :x:                 | Duration?                  | Duration(milliseconds: 150) |
+| parameter         | required            | type                       | default                     |
+|-------------------|---------------------|----------------------------|-----------------------------|
+| text              | :heavy_check_mark:  | Text                       |                             |
+| controller        | :x:                 | KeyboardTypingController?  |                             |
+| previewTextColor  | :x:                 | Color?                     |                             |
+| mode              | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal   |
+| duration          | :x:                 | Duration?                  | Duration(milliseconds: 150) |
 
 ```dart
   KeyboardTyping(
     text: Text("Something Text"),
   )
 ```
-<br/>
+
+<hr/>
 
 #### Play Typing Animation 🚩
 

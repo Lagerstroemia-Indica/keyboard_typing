@@ -1,3 +1,6 @@
+## 0.0.4
+* Add previewTextColor parameter.
+
 ## 0.0.3
 * Add repeat function.
 

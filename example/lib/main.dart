@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_typing/keyboard_typing.dart';
 import 'package:flutter_logcat/flutter_logcat.dart';
 
 void main() {
+  Log.configure(visible: kDebugMode);
+
   runApp(const MyApp());
 }
 
@@ -70,7 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             KeyboardTyping(
-              text: Text("Only TextWidget, Not define KeyboardTypingController :)"),
+              text: Text("Only TextWidget,\n Not define KeyboardTypingController :)"),
+            ),
+            const SizedBox(height: 36.0,),
+            KeyboardTyping(
+              text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)",
+              ),
+              previewTextColor: Colors.grey.withOpacity(0.5),
             ),
             const SizedBox(height: 18.0,),
             KeyboardTyping(
@@ -99,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               controller: controllerRepeat,
               mode: KeyboardTypingMode.repeat,
+              previewTextColor: Colors.grey.withOpacity(0.7),
             ),
             const SizedBox(height: 18.0,),
             Text(stateRepeat,

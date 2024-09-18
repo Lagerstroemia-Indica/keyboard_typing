@@ -13,6 +13,7 @@ class KeyboardTyping extends StatefulWidget {
     super.key,
     required this.text,
     this.controller,
+    this.previewTextColor,
     this.mode = KeyboardTypingMode.normal,
     this.duration,
   });
@@ -26,6 +27,10 @@ class KeyboardTyping extends StatefulWidget {
   ///
   /// and know state addStateEventListener [KeyboardTypingState].
   final KeyboardTypingController? controller;
+
+  /// If you define [previewTextColor], you can see preview TextWidget.
+  /// This will be help you to distinguish sentence more better.
+  final Color? previewTextColor;
 
   /// KeyboardTypingMode default value [KeyboardTypingMode.normal]
   ///
@@ -92,21 +97,49 @@ class _TypingWidgetState extends State<KeyboardTyping>
   /// Preserve user's Text Widget's data.
   @override
   Widget build(BuildContext context) {
-    return Text(
-      message.toString(),
-      style: widget.text.style,
-      maxLines: widget.text.maxLines,
-      textAlign: widget.text.textAlign,
+    return Stack(
       textDirection: widget.text.textDirection,
-      locale: widget.text.locale,
-      overflow: widget.text.overflow,
-      strutStyle: widget.text.strutStyle,
-      softWrap: widget.text.softWrap,
-      textHeightBehavior: widget.text.textHeightBehavior,
-      textScaler: widget.text.textScaler,
-      textWidthBasis: widget.text.textWidthBasis,
-      selectionColor: widget.text.selectionColor,
-      semanticsLabel: widget.text.semanticsLabel,
+      children: [
+        Visibility(
+          visible: widget.previewTextColor != null,
+          child: Text(
+            widget.text.data!,
+            style:
+                widget.text.style?.copyWith(color: widget.previewTextColor) ??
+                    DefaultTextStyle.of(context)
+                        .style
+                        .copyWith(color: widget.previewTextColor),
+            maxLines: widget.text.maxLines,
+            textAlign: widget.text.textAlign,
+            textDirection: widget.text.textDirection,
+            locale: widget.text.locale,
+            overflow: widget.text.overflow,
+            strutStyle: widget.text.strutStyle,
+            softWrap: widget.text.softWrap,
+            textHeightBehavior: widget.text.textHeightBehavior,
+            textScaler: widget.text.textScaler,
+            textWidthBasis: widget.text.textWidthBasis,
+            selectionColor: widget.text.selectionColor,
+            semanticsLabel: widget.text.semanticsLabel,
+          ),
+        ),
+        Text(
+          message.toString(),
+          style: widget.text.style,
+          maxLines: widget.text.maxLines,
+          textAlign: widget.text.textAlign,
+          textDirection: widget.text.textDirection,
+          locale: widget.text.locale,
+          overflow: widget.text.overflow,
+          strutStyle: widget.text.strutStyle,
+          softWrap: widget.text.softWrap,
+          textHeightBehavior: widget.text.textHeightBehavior,
+          textScaler: widget.text.textScaler,
+          textWidthBasis: widget.text.textWidthBasis,
+          selectionColor: widget.text.selectionColor,
+          semanticsLabel: widget.text.semanticsLabel,
+        )
+      ],
     );
   }
 

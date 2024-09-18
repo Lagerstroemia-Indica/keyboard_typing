@@ -28,7 +28,7 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 
 ```dart
   KeyboardTyping(
-    text: Text("Something Text"),
+    text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)"),
     previewTextColor: Colors.grey.withOpacity(0.5),
   )
 ```

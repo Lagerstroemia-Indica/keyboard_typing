@@ -21,7 +21,7 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 <br/>
 <br/>
 
-## 🌤 Update
+## 🌅 Update
 - If you define `previewTextColor` paremeter, you can see preview TextWidget's data.
 <!--![previewTextColor](https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc)-->
 <img src="https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc" alt="GIF" width="420">

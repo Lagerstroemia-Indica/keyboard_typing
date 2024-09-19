@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:keyboard_typing/src/typing_const.dart';
+import '/src/typing_const.dart';
 import '/src/typing_mode.dart';
 import '/src/typing_control_state.dart';
 import '/src/typing_controller.dart';

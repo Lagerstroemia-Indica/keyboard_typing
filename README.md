@@ -60,19 +60,52 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 #### Play Typing Animation 🚩
 
 ```dart
-  KeyboardTypingController controller = KeyboardTypingController();
-  
-  controller.play();
+// AutoPlay
+KeyboardTypingController controller = KeyboardTypingController();
+
+@override
+void initState() {
+  controller
+    ..addStateEventListener(keyboardStateEventListener)
+    ..play();
+}
+```
+```dart
+// User control
+@override
+Widget build(BuildContext context) {
+  ...
+  ElevatedButton(
+    onPressed: () {
+      controller.play();
+    }
+  )
+}
 ```
 
 <br/>
 
 #### Stop Typing Animation 🚧
 
+- If you want clear text to define 'true' into cancel parameter in stop function.
+
 ```dart
-  KeyboardTypingController controller = KeyboardTypingController();
-  
-  controller.stop();
+KeyboardTypingController controller = KeyboardTypingController();
+
+@override
+Widget build(BuildContext context) {
+  ...
+  ElevatedButton(
+    onPressed: () {
+      // Normal stop
+      controller.stop();
+
+      // Forced stop
+      controller.stop(cancel: true);    // Effect clear text and start at first.
+    }
+  )
+}
+
 ```
 
 <br/>

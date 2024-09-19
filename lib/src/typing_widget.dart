@@ -15,7 +15,7 @@ class KeyboardTyping extends StatefulWidget {
     this.controller,
     this.previewTextColor,
     this.mode = KeyboardTypingMode.normal,
-    this.duration,
+    this.intervalDuration,
   });
 
   /// TextWidget.
@@ -43,7 +43,9 @@ class KeyboardTyping extends StatefulWidget {
   final KeyboardTypingMode mode;
 
   /// Default duration milliseconds: 150
-  final Duration? duration;
+  ///
+  /// 0.0.6 ver Replace preperty name [duration] to [intervalDuration]
+  final Duration? intervalDuration;
 
   @override
   State<KeyboardTyping> createState() => _TypingWidgetState();
@@ -64,10 +66,10 @@ class _TypingWidgetState extends State<KeyboardTyping>
   @override
   void initState() {
     super.initState();
-    if (widget.duration == null) {
+    if (widget.intervalDuration == null) {
       duration = const Duration(milliseconds: 150);
     } else {
-      duration = widget.duration!;
+      duration = widget.intervalDuration!;
     }
 
     if (widget.controller != null) {

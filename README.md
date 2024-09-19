@@ -41,13 +41,13 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 
 #### Create KeyboardTyping Widget ⌨
 
-| parameter         | required            | type                       | default                     |
-|-------------------|---------------------|----------------------------|-----------------------------|
-| text              | :heavy_check_mark:  | Text                       |                             |
-| controller        | :x:                 | KeyboardTypingController?  |                             |
-| previewTextColor  | :x:                 | Color?                     |                             |
-| mode              | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal   |
-| duration          | :x:                 | Duration?                  | Duration(milliseconds: 150) |
+| parameter        | required            | type                       | default                     |
+|------------------|---------------------|----------------------------|-----------------------------|
+| text             | :heavy_check_mark:  | Text                       |                             |
+| controller       | :x:                 | KeyboardTypingController?  |                             |
+| previewTextColor | :x:                 | Color?                     |                             |
+| mode             | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal   |
+| intervalDuration | :x:                 | Duration?                  | Duration(milliseconds: 150) |
 
 ```dart
   KeyboardTyping(

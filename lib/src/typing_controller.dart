@@ -10,6 +10,11 @@ class KeyboardTypingController extends TypingProtocol {
       _typingControlEventListener;
   Function(KeyboardTypingState state)? _typingStateEventListener;
 
+  /// First init KeyboardTypingController
+  ///
+  /// Use [initState] function.
+  bool _isPlay = false;
+
   /// [_state] should not access in Private Typing Stateful Widget.
   ///
   /// It is only alternative FLAG
@@ -19,15 +24,34 @@ class KeyboardTypingController extends TypingProtocol {
       Function({required Map<String, dynamic> bundle}) eventFunction) {
     _state = state..addEventListener(_typingStateEventListener);
     _typingControlEventListener = eventFunction;
+
+    if (_isPlay) {
+      play();
+    }
   }
 
   /// Start Typing Animation. (like keyboard).
   ///
   /// Resume is when [KeyboardTypingState.pause].
+  ///
+  /// If you want play() at [initState] function.
+  /// try it this.
+  ///
+  /// -
+  ///
+  /// @override
+  /// void initState() {
+  ///   super.initState();
+  ///
+  ///   KeyboardTypingController controller = KeyboardTypingController();
+  ///   controller.play();
+  /// }
   @override
   void play() {
-    assert(_state != null,
-        "Put [TypingController] into [Typing] Widget's 'controller' parameter");
+    /*assert(_state != null,
+        "Put [TypingController] into [Typing] Widget's 'controller' parameter");*/
+
+    _isPlay = true;
 
     if (_state != null) {
       _typingControlEventListener(
@@ -47,8 +71,10 @@ class KeyboardTypingController extends TypingProtocol {
   ///
   @override
   void stop({bool cancel = false}) {
-    assert(_state != null,
-        "Put [TypingController] into [Typing] Widget's 'controller' parameter");
+    /*assert(_state != null,
+        "Put [TypingController] into [Typing] Widget's 'controller' parameter");*/
+
+    _isPlay = false;
 
     if (_state != null) {
       _typingControlEventListener(bundle: {

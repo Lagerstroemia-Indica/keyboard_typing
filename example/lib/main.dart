@@ -37,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final KeyboardTypingController controller = KeyboardTypingController();
   final KeyboardTypingController controllerRepeat = KeyboardTypingController();
+  final KeyboardTypingController controllerAutoStart = KeyboardTypingController();
   late String state;
   late String stateRepeat;
 
@@ -53,12 +54,14 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     },);
 
-    controllerRepeat.addStateEventListener((state) {
+    controllerRepeat..addStateEventListener((state) {
       Log.x("StateEventListener.. stateRepeat:$state");
       setState(() {
         stateRepeat = state.name.toUpperCase();
       });
     },);
+
+    controllerAutoStart.play();
   }
 
   @override
@@ -92,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               controller: controller,
-              duration: const Duration(milliseconds: 50),
+              intervalDuration: const Duration(milliseconds: 50),
             ),
             const SizedBox(height: 18.0,),
             Text(state,
@@ -113,7 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 18.0,),
             Text(stateRepeat,
               style: Theme.of(context).textTheme.headlineMedium,
-            )
+            ),
+            const SizedBox(height: 18.0,),
+            KeyboardTyping(
+              text: Text("Added AutoStart KeyboardTyping Animation when you add controller parameter"),
+              controller: controllerAutoStart,
+            ),
           ],
         ),
       ),

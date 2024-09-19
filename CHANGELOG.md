@@ -1,3 +1,8 @@
+## 0.0.6
+* Added autostart when define KeyboardTypingController.
+* Modify decribe to forcedStop.
+* Changed property name 'duration' to 'intervalDuration'.
+
 ## 0.0.5
 * Modify previewTextColor's description.
 

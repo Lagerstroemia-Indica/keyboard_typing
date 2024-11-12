@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:keyboard_typing/keyboard_typing.dart';
 import 'package:flutter_logcat/flutter_logcat.dart';
+import 'package:keyboard_typing/keyboard_typing.dart';
 
 void main() {
   Log.configure(visible: kDebugMode);
@@ -87,8 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)",
                 ),
                 previewTextColor: Colors.grey.withOpacity(0.5),
-                cursorMode: KeyboardTypingCursorMode.horizontal,
-                cursorColor: Colors.orange,
               ),
             ),
             const SizedBox(height: 18.0,),
@@ -103,7 +101,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               controller: controller,
               intervalDuration: const Duration(milliseconds: 50),
-              cursorMode: KeyboardTypingCursorMode.vertical,
             ),
             const SizedBox(height: 18.0,),
             Text(state,

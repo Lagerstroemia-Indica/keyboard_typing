@@ -9,18 +9,19 @@ import '../typing_cursor.dart';
 /// Use Controller's [cursor] function.
 /// It has [visible] parameter. You can measure it.
 class Caret extends StatefulWidget {
-  const Caret({
-    super.key,
-    this.isVisible = true,
-    required this.textSize,
-    this.cursorColor,
-    required this.cursorMode,
-  });
+  const Caret(
+      {super.key,
+      this.isVisible = true,
+      required this.textSize,
+      this.cursorColor,
+      required this.cursorMode,
+      required this.thickness});
 
   final bool isVisible;
   final Size textSize;
   final Color? cursorColor;
   final KeyboardTypingCursorMode cursorMode;
+  final double thickness;
 
   @override
   State<Caret> createState() => _CaretState();
@@ -28,8 +29,8 @@ class Caret extends StatefulWidget {
 
 class _CaretState extends State<Caret> {
   /// Setting Cursor Size
-  double? width;
-  double? height;
+  double width = 0.0;
+  double height = 0.0;
 
   /// Cursor Timer
   Timer? cursorTimer;
@@ -51,12 +52,12 @@ class _CaretState extends State<Caret> {
         isVisible = false;
         break;
       case KeyboardTypingCursorMode.vertical:
-        width = 1.0;
+        width = widget.thickness;
         height = widget.textSize.height;
         break;
       case KeyboardTypingCursorMode.horizontal:
         width = widget.textSize.height / 2;
-        height = 1.0;
+        height = widget.thickness;
         break;
     }
   }

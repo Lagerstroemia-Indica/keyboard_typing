@@ -3,6 +3,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import '/src/typing_cursor.dart';
+import '/src/cursor/cursor_style.dart';
 import '/src/cursor/cursor_widget.dart';
 import '/src/typing_const.dart';
 import '/src/typing_mode.dart';
@@ -11,15 +12,16 @@ import '/src/typing_controller.dart';
 import '/src/typing_state.dart';
 
 class KeyboardTyping extends StatefulWidget {
-  const KeyboardTyping(
+  KeyboardTyping(
       {super.key,
       required this.text,
       this.controller,
       this.previewTextColor,
       this.mode = KeyboardTypingMode.normal,
       this.intervalDuration,
-      this.cursorMode = KeyboardTypingCursorMode.none,
-      this.cursorColor});
+      CursorStyle? cursorStyle})
+      : cursorStyle =
+            cursorStyle ?? CursorStyle(mode: KeyboardTypingCursorMode.none);
 
   /// TextWidget.
   ///
@@ -47,19 +49,18 @@ class KeyboardTyping extends StatefulWidget {
 
   /// Default duration milliseconds: 150
   ///
-  /// 0.0.6 ver Replace preperty name [duration] to [intervalDuration]
+  /// 0.0.6 ver Replace property name [duration] to [intervalDuration]
   final Duration? intervalDuration;
 
   /// Default [KeyboardTypingCursor.none]
   ///
   /// If you want cursor type horizontal shape [KeyboardTypingCursor.horizontal],
   /// If you want cursor type vertical shape [KeyboardTypingCursor.vertical]
-  final KeyboardTypingCursorMode cursorMode;
-
+  ///
   /// CursorColor.
   ///
   /// If you don't define color, you can see TextColor or DefaultTextColor
-  final Color? cursorColor;
+  final CursorStyle cursorStyle;
 
   @override
   State<KeyboardTyping> createState() => _TypingWidgetState();
@@ -161,17 +162,18 @@ class _TypingWidgetState extends State<KeyboardTyping>
         Text.rich(
           TextSpan(
               text: message.toString(),
-              style: widget.text.style,
+              style: widget.text.style ?? defaultTextStyle.style,
               semanticsLabel: widget.text.semanticsLabel,
               children: [
                 WidgetSpan(
                     child: Caret(
                   isVisible: isCursorVisible,
                   textSize: painter.size,
-                  cursorColor: widget.cursorColor ??
+                  cursorColor: widget.cursorStyle.color ??
                       widget.text.style?.color ??
                       defaultTextStyle.style.color,
-                  cursorMode: widget.cursorMode,
+                  cursorMode: widget.cursorStyle.mode,
+                  thickness: widget.cursorStyle.width,
                 ))
               ]),
           maxLines: widget.text.maxLines ?? defaultTextStyle.maxLines,

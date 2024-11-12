@@ -50,7 +50,7 @@ class _SingleExamState extends State<SingleExam> {
               previewTextColor: Colors.grey,
               cursorStyle: CursorStyle(
                 mode: KeyboardTypingCursorMode.vertical,
-                width: 10.0
+                width: 1.0,
               ),
             ),
             Padding(

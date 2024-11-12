@@ -1,3 +1,6 @@
+## 0.0.7
+* Added Keyboard 'Cursor(Caret)'
+
 ## 0.0.6
 * Added autostart when define KeyboardTypingController.
 * Modify decribe to forcedStop.

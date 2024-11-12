@@ -22,18 +22,31 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 <br/>
 
 ## 🌅 Update
-- If you define `previewTextColor` paremeter, you can see preview TextWidget's data.
-<!--![previewTextColor](https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc)-->
-<img src="https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc" alt="GIF" width="420">
+- 0.0.7 version
+- If you define `cursorStyle` parameter, you can see cursor(caret) beside TextWidget.
+
+#### CursorStyle 📍
+|  parameter    |  required           |  type                      |  default          |
+|---------------|---------------------|----------------------------|-------------------|    
+| mode          | :heavy_check_mark:  |  KeyboardTypingCursorMode  |  none             |
+| color         | :x:                 |  Color?                    |                   |
+| width         | :x:                 |  double                    |  1.0              |
 
 ```dart
-  KeyboardTyping(
-    text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)"),
-    previewTextColor: Colors.grey.withOpacity(0.5),
+KeyboardTyping(
+  text: Text("KeyboardTyping Test Sentence"),
+  controller: controller,
+  cursorStyle: CursorStyle(
+    mode: KeyboardTypingCursorMode.vertical
   )
+)
 ```
+<img src="https://github.com/user-attachments/assets/cbe45c22-0cbf-4cb1-9e69-ba57d86fad21" alt="GIF" width="380">
+
 
 <br/>
+<br/>
+
 
 ## 🚀 Usage
 - If you don't define a `KeyboardTypingController`, The `KeyboardTyping` Widget plays automatically.
@@ -41,13 +54,14 @@ import 'package:keyboard_typing/keyboard_typing.dart';
 
 #### Create KeyboardTyping Widget ⌨
 
-| parameter        | required            | type                       | default                     |
-|------------------|---------------------|----------------------------|-----------------------------|
-| text             | :heavy_check_mark:  | Text                       |                             |
-| controller       | :x:                 | KeyboardTypingController?  |                             |
-| previewTextColor | :x:                 | Color?                     |                             |
-| mode             | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal   |
-| intervalDuration | :x:                 | Duration?                  | Duration(milliseconds: 150) |
+| parameter        | required            | type                       | default                                          |
+|------------------|---------------------|----------------------------|--------------------------------------------------|
+| text             | :heavy_check_mark:  | Text                       |                                                  |
+| controller       | :x:                 | KeyboardTypingController?  |                                                  |
+| previewTextColor | :x:                 | Color?                     |                                                  |
+| mode             | :x:                 | KeyboardTypingMode         | KeyboardTypingMode.normal                        |
+| intervalDuration | :x:                 | Duration?                  | Duration(milliseconds: 150)                      |
+| cursorStyle      | :x:                 | CursorStyle?               | CursorStyle(mode: KeyboardTypingCursorMode.none) |
 
 ```dart
   KeyboardTyping(
@@ -145,6 +159,21 @@ Widget build(BuildContext context) {
 
   // remove
   // controller.removeStateEventListener(...);
+```
+
+<br/>
+
+#### Preview Text 👥
+- 0.0.6 version
+- If you define `previewTextColor` paremeter, you can see preview TextWidget's data.
+<!--![previewTextColor](https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc)-->
+<img src="https://github.com/user-attachments/assets/f1370304-1587-44ed-a166-fac7922879dc" alt="GIF" width="420">
+
+```dart
+  KeyboardTyping(
+    text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)"),
+    previewTextColor: Colors.grey.withOpacity(0.5),
+  )
 ```
 
 <br/>

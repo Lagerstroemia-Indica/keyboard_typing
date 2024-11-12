@@ -40,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final KeyboardTypingController controllerAutoStart = KeyboardTypingController();
   late String state;
   late String stateRepeat;
+  bool isCursorVisible = true;
 
   @override
   void initState() {
@@ -77,12 +78,18 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             KeyboardTyping(
               text: Text("Only TextWidget,\n Not define KeyboardTypingController :)"),
+              // cursorMode: KeyboardTypingCursorMode.none,
             ),
             const SizedBox(height: 36.0,),
-            KeyboardTyping(
-              text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)",
+            Container(
+              color: Colors.green,
+              child: KeyboardTyping(
+                text: Text("If you define 'previewTextColor' parameter,\nThen you can see a preview TextWidget :)",
+                ),
+                previewTextColor: Colors.grey.withOpacity(0.5),
+                cursorMode: KeyboardTypingCursorMode.horizontal,
+                cursorColor: Colors.orange,
               ),
-              previewTextColor: Colors.grey.withOpacity(0.5),
             ),
             const SizedBox(height: 18.0,),
             KeyboardTyping(
@@ -96,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               controller: controller,
               intervalDuration: const Duration(milliseconds: 50),
+              cursorMode: KeyboardTypingCursorMode.vertical,
             ),
             const SizedBox(height: 18.0,),
             Text(state,
@@ -129,15 +137,34 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          FloatingActionButton(
-            key: null,
-            onPressed: () {
-              setState(() {
-                controller.play();
-                controllerRepeat.play();
-              });
-            },
-            child: const Text("Play"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                key: null,
+                onPressed: () {
+                  setState(() {
+                    isCursorVisible = !isCursorVisible;
+                    controller.cursor(visible: isCursorVisible);
+                    controllerRepeat.cursor(visible: isCursorVisible);
+                  });
+                },
+                child: Text("Cursor\n$isCursorVisible",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(width: 16.0,),
+              FloatingActionButton(
+                key: null,
+                onPressed: () {
+                  setState(() {
+                    controller.play();
+                    controllerRepeat.play();
+                  });
+                },
+                child: const Text("Play"),
+              ),
+            ],
           ),
           const SizedBox(height: 16.0,),
           Row(

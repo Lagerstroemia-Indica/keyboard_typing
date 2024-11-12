@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../typing_cursor.dart';
 
+/// KeyboardCursor(or Caret) Widget
+///
+/// If you don't want see [Caret]
+/// Use Controller's [cursor] function.
+/// It has [visible] parameter. You can measure it.
 class Caret extends StatefulWidget {
   const Caret({
     super.key,

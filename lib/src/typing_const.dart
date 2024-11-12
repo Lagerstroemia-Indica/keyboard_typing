@@ -4,4 +4,5 @@ class TypingConstant {
 
   static const String controlState = "controlState";
   static const String stopForced = "stopForced";
+  static const String cursorVisible = "cursorVisible";
 }

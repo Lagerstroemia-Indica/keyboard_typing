@@ -103,4 +103,17 @@ class KeyboardTypingController extends TypingProtocol {
       _typingStateEventListener = null;
     }
   }
+
+  /// Default visible = true,
+  ///
+  /// Forced control Text Cursor visible
+  @override
+  void cursor({required bool visible}) {
+    if (_state != null) {
+      _typingControlEventListener(bundle: {
+        TypingConstant.controlState: TypingControlState.cursor,
+        TypingConstant.cursorVisible: visible
+      });
+    }
+  }
 }

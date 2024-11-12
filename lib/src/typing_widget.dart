@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import '/src/typing_cursor.dart';
+import '/src/cursor/cursor_widget.dart';
 import '/src/typing_const.dart';
 import '/src/typing_mode.dart';
 import '/src/typing_control_state.dart';
@@ -9,14 +11,15 @@ import '/src/typing_controller.dart';
 import '/src/typing_state.dart';
 
 class KeyboardTyping extends StatefulWidget {
-  const KeyboardTyping({
-    super.key,
-    required this.text,
-    this.controller,
-    this.previewTextColor,
-    this.mode = KeyboardTypingMode.normal,
-    this.intervalDuration,
-  });
+  const KeyboardTyping(
+      {super.key,
+      required this.text,
+      this.controller,
+      this.previewTextColor,
+      this.mode = KeyboardTypingMode.normal,
+      this.intervalDuration,
+      this.cursorMode = KeyboardTypingCursorMode.none,
+      this.cursorColor});
 
   /// TextWidget.
   ///
@@ -47,6 +50,17 @@ class KeyboardTyping extends StatefulWidget {
   /// 0.0.6 ver Replace preperty name [duration] to [intervalDuration]
   final Duration? intervalDuration;
 
+  /// Default [KeyboardTypingCursor.none]
+  ///
+  /// If you want cursor type horizontal shape [KeyboardTypingCursor.horizontal],
+  /// If you want cursor type vertical shape [KeyboardTypingCursor.vertical]
+  final KeyboardTypingCursorMode cursorMode;
+
+  /// CursorColor.
+  ///
+  /// If you don't define color, you can see TextColor or DefaultTextColor
+  final Color? cursorColor;
+
   @override
   State<KeyboardTyping> createState() => _TypingWidgetState();
 }
@@ -62,6 +76,12 @@ class _TypingWidgetState extends State<KeyboardTyping>
   Timer? messageTimer;
   KeyboardTypingController? typingController;
   late final Duration duration;
+
+  /// Caclulate Text Layout size
+  late final TextPainter painter;
+
+  /// Cursor(Caret or Text Cursor) manage widget visibility
+  bool isCursorVisible = true;
 
   @override
   void initState() {
@@ -83,6 +103,18 @@ class _TypingWidgetState extends State<KeyboardTyping>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    painter = TextPainter(
+      text: TextSpan(text: widget.text.data!, style: widget.text.style),
+      maxLines: 1,
+      textDirection: TextDirection.ltr,
+    );
+    painter.layout();
+  }
+
+  @override
   void dispose() {
     message.clear();
     messageQueue.clear();
@@ -99,48 +131,63 @@ class _TypingWidgetState extends State<KeyboardTyping>
   /// Preserve user's Text Widget's data.
   @override
   Widget build(BuildContext context) {
+    final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
+
     return Stack(
       textDirection: widget.text.textDirection,
       children: [
-        Visibility(
-          visible: widget.previewTextColor != null,
+        Opacity(
+          opacity: widget.previewTextColor != null ? 1.0 : 0.0,
+          // visible: widget.previewTextColor != null,
           child: Text(
             widget.text.data!,
-            style:
-                widget.text.style?.copyWith(color: widget.previewTextColor) ??
-                    DefaultTextStyle.of(context)
-                        .style
-                        .copyWith(color: widget.previewTextColor),
+            style: widget.text.style
+                    ?.copyWith(color: widget.previewTextColor) ??
+                defaultTextStyle.style.copyWith(color: widget.previewTextColor),
             maxLines: widget.text.maxLines,
             textAlign: widget.text.textAlign,
             textDirection: widget.text.textDirection,
             locale: widget.text.locale,
-            overflow: widget.text.overflow,
+            overflow: widget.text.overflow ?? TextOverflow.clip,
             strutStyle: widget.text.strutStyle,
-            softWrap: widget.text.softWrap,
+            softWrap: widget.text.softWrap ?? true,
             textHeightBehavior: widget.text.textHeightBehavior,
-            textScaler: widget.text.textScaler,
-            textWidthBasis: widget.text.textWidthBasis,
+            textScaler: widget.text.textScaler ?? TextScaler.noScaling,
+            textWidthBasis: widget.text.textWidthBasis ?? TextWidthBasis.parent,
             selectionColor: widget.text.selectionColor,
             semanticsLabel: widget.text.semanticsLabel,
           ),
         ),
-        Text(
-          message.toString(),
-          style: widget.text.style,
-          maxLines: widget.text.maxLines,
-          textAlign: widget.text.textAlign,
+        Text.rich(
+          TextSpan(
+              text: message.toString(),
+              style: widget.text.style,
+              semanticsLabel: widget.text.semanticsLabel,
+              children: [
+                WidgetSpan(
+                    child: Caret(
+                  isVisible: isCursorVisible,
+                  textSize: painter.size,
+                  cursorColor: widget.cursorColor ??
+                      widget.text.style?.color ??
+                      defaultTextStyle.style.color,
+                  cursorMode: widget.cursorMode,
+                ))
+              ]),
+          maxLines: widget.text.maxLines ?? defaultTextStyle.maxLines,
+          textAlign: widget.text.textAlign ?? TextAlign.start,
           textDirection: widget.text.textDirection,
           locale: widget.text.locale,
-          overflow: widget.text.overflow,
+          overflow: widget.text.overflow ?? TextOverflow.clip,
           strutStyle: widget.text.strutStyle,
-          softWrap: widget.text.softWrap,
-          textHeightBehavior: widget.text.textHeightBehavior,
-          textScaler: widget.text.textScaler,
-          textWidthBasis: widget.text.textWidthBasis,
+          softWrap: widget.text.softWrap ?? true,
+          textHeightBehavior: widget.text.textHeightBehavior ??
+              defaultTextStyle.textHeightBehavior,
+          textScaler: widget.text.textScaler ?? TextScaler.noScaling,
+          textWidthBasis:
+              widget.text.textWidthBasis ?? defaultTextStyle.textWidthBasis,
           selectionColor: widget.text.selectionColor,
-          semanticsLabel: widget.text.semanticsLabel,
-        )
+        ),
       ],
     );
   }
@@ -200,6 +247,11 @@ class _TypingWidgetState extends State<KeyboardTyping>
               ? KeyboardTypingState.pause
               : KeyboardTypingState.stop;
         }
+        break;
+      case TypingControlState.cursor:
+        setState(() {
+          isCursorVisible = bundle[TypingConstant.cursorVisible];
+        });
     }
   }
 }

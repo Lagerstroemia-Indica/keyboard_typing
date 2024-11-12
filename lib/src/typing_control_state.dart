@@ -16,5 +16,8 @@ enum TypingControlState {
 
   /// Anywhere, call [stop] state.
   /// Immediately stop Typing text.
-  stop
+  stop,
+
+  /// [Caret]'s state.
+  cursor,
 }
